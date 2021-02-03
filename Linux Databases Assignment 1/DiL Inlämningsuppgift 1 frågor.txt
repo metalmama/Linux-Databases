@@ -1,0 +1,142 @@
+Frågor
+1. Var hittar man log-filerna för databaserna? (MySQL / MariaDB, och MongoDB)
+
+The default location for each of the logs is the MySQL Data directory (C:\ProgramData\MySQL\MySQL Server [version number]\Data\), and the default log names are based on the computer's device name.
+
+The location of these logs is configured in our my. cnf ( my. ini on Windows) MariaDB configuration file. On Linux, the default location is /var/log/mysql/ and on Windows the default location is in the MariaDB data directory.
+
+The main log file is the mongod. log . You can specify the log file location when you are starting the mongod process but if you have installed on Ubuntu from a package then you log file will normally be located in /var/log/mongodb/mongod. log .
+
+
+2. Vad är skillnaden mellan en SQL databas som MySQL / MariaDB och en NoSQL databas som MongoDB?
+
+
+MySQL is a relational database that is based on tabular design whereas NoSQL is non-relational in nature with its document-based design. ... MySQL is being used with a standard query language called SQL whereas NoSQL like databases misses a standard query language.
+
+Main difference:
+SQL databases are vertically scalable, NoSQL databases are horizontally scalable. SQL databases are table based, while NoSQL databases are document, key-value, graph or wide-column stores. SQL databases are better for multi-row transactions, NoSQL are better for unstructured data like documents or JSON.19 m
+
+https://www.educba.com/mysql-vs-nosql/
+
+https://www.edureka.co/blog/sql-vs-nosql-db/
+
+
+3. Vad finns det för likheter mellan databaserna?
+
+
+4. Fundera, när vill man välja en SQL databas, och när vill man välja en NoSQL databas?
+
+When to use SQL instead of NoSQL
+use-sql-instead-of-nosql
+
+You’re working with complex queries and reports. With SQL you can build one script that retrieves and presents your data. NoSQL doesn’t support relations between data types. Running queries in NoSQL is doable, but much slower.
+You have a high transaction application. SQL databases are a better fit for heavy duty or complex transactions because it’s more stable and ensure data integrity.
+You need to ensure ACID compliance (Atomicity, Consistency, Isolation, Durability) or defining exactly how transactions interact with a database. 
+You don’t anticipate a lot of changes or growth. If you’re not working with a large volume of data or many data types, NoSQL would be overkill.
+
+When to use NoSQL instead of SQL
+
+You are constantly adding new features, functions, data types, and it’s difficult to predict how the application will grow over time.
+Changing a data model is SQL is clunky and requires code changes. A lot of time is invested designing the data model because changes will impact all or most of the layers in the application.
+In NoSQL, we are working with a highly flexible schema design or no predefined schema. The data modeling process is iterative and adaptive. Changing the structure or schema will not impact development cycles or create any downtime for the application.
+You are not concerned about data consistency and 100% data integrity is not your top goal. This is related to the above SQL requirement for ACID compliance. For example, with social media platforms, it isn’t important if everyone sees your new post at the exact same time, which means data consistency is not a priority.
+You have a lot of data, many different data types, and your data needs will only grow over time. NoSQL makes it easy to store all different types of data together and without having to invest time into defining what type of data you’re storing in advance.
+Your data needs scale up, out, and down. As discussed above, NoSQL provides much greater flexibility and the ability to control costs as your data needs change.
+
+When to Use Both SQL and NoSQL
+
+In answering SQL vs. NoSQL, we have to start with understanding the domain. What’s the end state you’re trying to achieve? SQL vs. NoSQL in 2018 is often not about one or the other, but about when and where to use each within the same application and ecosystem.
+
+We recently designed an application where NoSQL made the most sense for many different reasons. This same application required reports. Instead of overanalyzing the differences between SQL and NoSQL, we decided to use both – NoSQL for the web and desktop versions of the application and SQL for the reports. We plan to store the data in NoSQL databases then transfer only the data we need for reports to a SQL database. If you’re interested, we explain how we proactively designed a ready-to-scale architecture without bloating the application in another blog.
+
+https://www.integrant.com/when-to-use-sql-vs-nosql/
+
+5. Om du ger en annan part tillgång till din databas, vad är då viktigt att tänka på?
+(Generell fråga, du behöver inte svara för båda databaserna)
+
+How they are using and storing the data in your database. You should make sure they have the right permissions so that you do not relinquish complete control over your database. You should also have a suitable back up routine in place. There is no undo feature in Linux databases. If something is deleted, or changed which is not to your liking there is no way of reversing it without continous backup. 
+
+
+6. Vad för typ av information kan vara känsligt / problematiskt att spara in en databas
+när det kommer till tex GDPR?
+
+The General Data Protection Regulation (GDPR) is a privacy and security law that came into force in 2018. It is a law passed by the EU legislature but applies to organisations anywhere as long as they collect data related to people in the EU. Domestic legislation has previously existed such as for instance The Data Protection Act 1998 in the UK and Dataskyddsförordningen in Sweden. 
+
+According to the provisions of GDPR you are caught by the legislation if you process the personal data of EU citizens or residents, or you offer goods or services to such people, then the GDPR applies to you even if you’re not in the EU. 
+
+Second, the fines for violating the GDPR are very high. There are two tiers of penalties, which max out at €20 million or 4% of global revenue (whichever is higher), plus data subjects have the right to seek compensation for damages. 
+
+This means that by storing data in a database it is very likely that at some point you will be caught by GDPR as its definitions are very wide as set out below:
+
+
+Personal data — Personal data is any information that relates to an individual who can be directly or indirectly identified. Names and email addresses are obviously personal data. Location information, ethnicity, gender, biometric data, religious beliefs, web cookies, and political opinions can also be personal data. Pseudonymous data can also fall under the definition if it’s relatively easy to ID someone from it.
+
+Data processing — Any action performed on data, whether automated or manual. The examples cited in the text include collecting, recording, organizing, structuring, storing, using, erasing… so basically anything.
+
+Data subject — The person whose data is processed. These are your customers or site visitors.
+
+Data controller — The person who decides why and how personal data will be processed. If you’re an owner or employee in your organization who handles data, this is you.
+
+Data processor — A third party that processes personal data on behalf of a data controller. The GDPR has special rules for these individuals and organizations. They could include cloud servers like Tresorit or email service providers like ProtonMail.
+
+Data protection principles
+
+If you process data, you have to do so according to seven protection and accountability principles outlined in Article 5.1-2:
+
+Lawfulness, fairness and transparency — Processing must be lawful, fair, and transparent to the data subject.
+Purpose limitation — You must process data for the legitimate purposes specified explicitly to the data subject when you collected it.
+Data minimization — You should collect and process only as much data as absolutely necessary for the purposes specified.
+Accuracy — You must keep personal data accurate and up to date.
+Storage limitation — You may only store personally identifying data for as long as necessary for the specified purpose.
+Integrity and confidentiality — Processing must be done in such a way as to ensure appropriate security, integrity, and confidentiality (e.g. by using encryption).
+Accountability — The data controller is responsible for being able to demonstrate GDPR compliance with all of these principles.
+
+https://gdpr.eu/tag/gdpr/
+https://gdpr.eu/tag/gdpr/
+
+
+7. Nämn några SQL-databaser, samt några NoSQL-databaser.
+Oracle 12c. 
+MySQL.
+Microsoft SQL Server
+PostgreSQL
+MariaDB
+DB2
+SAP HANA
+
+MongoDB
+CouchDB
+CouchBase
+Cassandra
+HBase
+Redis
+Riak
+Neo4J
+
+8. Om flera företag, organisationer eller personer använder samma databas, varför är
+det då viktigt att sätta upp separata användare i databasen för dessa parter?
+
+One good reason for a separate database is if you wish to be able to get your customers to send you there database when they hit a bug. If the database does not contain any password there may be fewer issues.
+
+
+
+9. Vilka delar i CRUD påverkar / gör ändringar i databasen, och vilka delar i CRUD gör
+inte det?
+
+C - create
+U - update
+D - delete
+
+
+10. Hur ansluter man till någon annans databas från terminalen? (Visa både på MySQL
+och MongoDB)
+
+mysql -u username - p
+show databases;
+use dbnam;
+
+https://www.a2hosting.com/kb/developer-corner/mysql/connect-to-mysql-from-the-command-line
+
+Mongo DB
+
+https://geekflare.com/mongodb-queries-examples/

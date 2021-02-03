@@ -1,0 +1,1 @@
+mysql -u guest -p mydb < mydb.sql
