@@ -1,0 +1,161 @@
+#prata med MongDB databas
+
+~$mongo 
+
+#kommer in i mongo databasen
+
+> use facebook 
+
+#skapar facebook databasen
+
+>db.people.insert({ firstname: "john", lastname: "doe", age: 42 })
+
+
+#funktion som man anropar, lagger in data. I parantesen skriver man json. Inget semicolon, tryck pa enter
+
+show collections;
+people
+
+db.people.find({})
+
+#om man vill se vad som finns anvand ovan funktion, stoppa in json utan objekt, sa far du alla objekt. 
+
+far tillbaka vad som ser inte ut som giltig json, det ar ok for att det ar ju egentligen bson
+
+Ser man nycklarna som man lagt in 
+
+db.people.update({firstname: "john"}), {lastname:"nilsen"})
+
+#ersatter all info
+
+FINNS INGEN UNDO! Precis som SQL
+
+db.people.update({firstname:"david"}, {$set: {lastname: "nilsen"} } );
+
+#byter efternamnet utan att ersatta hela dokumentet
+
+db.people.find({})
+
+db.people.insertMany([])
+
+#function pa var collection men kan insert en array, stoppa in flera samtidigt.
+
+db.people.remove({}) 
+#sok funktion, tar bort allt
+
+db.people.remove({_id: objectID(kdlfjdljdlfj)})
+#tar bort ett specifikt objekt genom att lagga in unika objektID
+
+db.people.insert({buildingNAME: "ABCDE", nrRooms: 4}) 
+#kan lagga till vad du vill, man behover aldrig lagga till fnuttar pa variable namnen. Men nar du far tillbaka det fran mongo sa far man json med fnuttar
+
+db.people.find({firstname> {$exists: true}, lastname: {$exists: true}, age: {$exists: true})
+
+#hittar entry i databasen $ fore gor nagot i mongo, mongo-tecken. 
+Tank pa att sok parametern ar case sensitive. Samma sak, nycklarna ar case sensitive. 
+
+db.people.find({firstname: {$exists: true }});
+#har far man fram alla som har fornamn vilket blir hela collection
+
+my_query = {firstname: {$exists: {true}});
+#man kan lagg in en ???? som sokparameter
+
+db.people.find ({})
+
+#skriver man in nycklar dar da sa soker man inte langre pa ett tomt objekt
+
+
+#det gar att skapa scheman ocksa att att datan inte hamnar fel
+Lank i chatten
+
+#Skapa schema i mongoDB
+
+db.createCollection("buildings",{
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["name", "year", "address", "rooms"]
+            properties: {
+                name:{
+                    bsonType: "string"
+                    }
+                year: {
+                    bsonType: "int"
+                   }
+                address: {
+                    bsonType : "string"
+                    }
+                rooms:
+                    bsonType: "int"
+                    }
+                }
+                
+            }
+      validationLEvel: "moderate"
+      }
+}
+
+#nu ska vi stoppa in nagot som ar giltigt
+
+db.buildings.insert({
+"name": "nice house in spain",
+"year": 1990,
+"address": "nice road 12",
+"rooms" : 7,
+         
+#ovan ar samma som CREATE DATABASE...etc i SQL
+Ovan funkade inte i forelasningen! La till 
+
+validationLEvel: "moderate"
+
+For att fixa felet?
+Testa med ovningarna senare. 
+
+#finns manga bibliotek som automatiskt skapar scheman efter klasser, tex bibliotex i python. Sallan man skriver scheman sjalv. Sitter man inne i databasen maste man skriva det manuellt. 
+
+
+READ
+CREATE
+UPDATES
+DELETE
+
+Gatt igenom de funktionerna som vi har gjort i SQL
+Finns valdigt mycket mer funktionalitet i mongoDB 
+
+#hur man kommunicerar med mongoDB fran Python
+det gar aven att gora via mySQL
+
+#mongo engine bibliotek i python
+
+from mongoengine import *
+
+connect("namnpadatabas")
+#om inte skriver namn sa connectar det lokalt
+#om databasen inte finns sa skapas den
+
+class Person(Document):
+    firstname = StringField()
+    lastname = StringField()
+    age = IntField()
+    
+def create_person():
+person = Person(firstname = "john", lastname = "doe", age = 33)
+person.save()
+
+def get_people():
+    for person in Person.objects:
+    
+
+get_people()
+
+#i terminalen i pycharm
+installera mongodb package, annars fungerar det inte
+
+#man kan inte stoppa in nagot i databasen som inte ser ut som ett schema
+
+#mycket lattare att starta upp schema med hjalp av python script.
+
+
+
+
+

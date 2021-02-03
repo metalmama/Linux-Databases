@@ -1,0 +1,112 @@
+Del 1: SQL
+
+create.sql
+
+mysql
+
+CREATE DATABASE bank;
+USE bank;
+
+read -p "Enter username: " username
+read -p "Enter database name: " database_name
+
+mysql -u $username -p $database_name < ./bank_accounts.sql
+
+
+create table customer_holdings (
+	id INT AUTO_INCREMENT,
+	first_name VARCHAR(50),
+	last_name VARCHAR(50),
+	holding INT,
+  PRIMARY KEY (id)
+  FOREIGN KEY (holding) REFERENCES ...???
+);
+
+read.sql
+
+SELECT * FROM customer_holding;
+
+update.sql
+
+UPDATE customer_holding
+SET holding = 200, 
+WHERE id = 1
+
+delete.sql
+
+DELETE FROM customer_holding WHERE id = 1;
+
+Del 2: MongoDB
+
+create.sh
+
+use bank
+
+>db.bank.insert({ firstname: "", lastname: "", holding: })
+
+
+mongoimport --db bank --collection bank_accounts --file ./bank_accounts.json --jsonArray
+
+read.sh
+
+show collections;
+people
+
+db.people.find({})
+
+update.sh
+
+db.people.insertMany([])
+
+delete.sh
+
+db.people.remove({}) 
+
+db.people.remove({_id: objectID(kdlfjdljdlfj)})
+
+Del 3: 
+
+Skapa en ny tabell i MySql
+
+mysql
+
+USE bank;
+
+CREATE TABLE locations  (
+	id INT AUTO_INCREMENT,
+	country VARCHAR(50),
+	address VARCHAR(50),
+  PRIMARY KEY (id)
+);
+
+Skapa en ny collection in MongoDB
+
+db.createCollection("buildings",{
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["name", "year", "address", "rooms"]
+            properties: {
+                name:{
+                    bsonType: "string"
+                    }
+                year: {
+                    bsonType: "int"
+                   }
+                address: {
+                    bsonType : "string"
+                    }
+                rooms:
+                    bsonType: "int"
+                    }
+                }
+                
+            }
+      validationLEvel: "moderate"
+      }
+}
+
+
+
+
+
